@@ -10,3 +10,6 @@
 [submodule ".vim/bundle/molokai"]
 	path = .vim/bundle/molokai
 	url = https://github.com/fatih/molokai
+[submodule ".bash-git-prompt"]
+	path = .bash-git-prompt
+	url = https://github.com/magicmonty/bash-git-prompt.git
