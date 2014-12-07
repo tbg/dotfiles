@@ -1,7 +1,9 @@
 #!/bin/bash
 
+. .gitcd.sh
+
 function cdc () {
-cd -P $(find ~ -true -name 'cockroach' -type d | head -n 1)
+  gitcd "cockroachdb/cockroach"
 }
 
 # bash-git-prompt
