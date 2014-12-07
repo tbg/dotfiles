@@ -16,3 +16,6 @@ source ~/.bash-git-prompt/gitprompt.sh
 export GOPATH="$HOME/go"
 export PATH="$PATH:$GOPATH/bin"
 
+#!/bin/bash
+
+alias g=git

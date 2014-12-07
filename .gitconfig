@@ -1,0 +1,24 @@
+[user]
+  email = tobias.schottdorf@gmail.com
+  name = Tobias Schottdorf
+[push]
+  default = simple
+[color]
+  ui = true
+[core]
+  editor = vim
+[alias]
+  st = status
+  ci = commit
+  br = branch
+  co = checkout
+  ca = commit --amend --no-edit
+  rbo = rebase origin/master
+  hr = reset --hard
+  pr = pull --rebase
+  smu = submodule update --init --recursive
+  s = status --short --branch
+  aa = add -A
+
+[branch]
+  autosetuprebase = always
