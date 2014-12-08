@@ -1,10 +1,6 @@
 #!/bin/bash
 
-. .gitcd.sh
-
-function cdc () {
-  gitcd "cockroachdb/cockroach"
-}
+. ~/.git-cd/gitcd.sh
 
 # bash-git-prompt
 export GIT_PROMPT_ONLY_IN_REPO=0
@@ -18,6 +14,6 @@ source ~/.bash-git-prompt/gitprompt.sh
 export GOPATH="$HOME/go"
 export PATH="$PATH:$GOPATH/bin"
 
-#!/bin/bash
-
 alias g=git
+alias gcd=gitcd
+alias ccd="gitcd cockroachdb/cockroach"

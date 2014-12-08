@@ -1,15 +1,24 @@
 [submodule ".vim/bundle/vim-go"]
 	path = .vim/bundle/vim-go
 	url = https://github.com/fatih/vim-go.git
+	branch = master
 [submodule ".vim/bundle/ultisnips"]
 	path = .vim/bundle/ultisnips
 	url = git://github.com/SirVer/ultisnips.git
+	branch = master
 [submodule ".vim/vim-snippets"]
 	path = .vim/vim-snippets
 	url = https://github.com/honza/vim-snippets.git
+	branch = master
 [submodule ".vim/bundle/molokai"]
 	path = .vim/bundle/molokai
 	url = https://github.com/fatih/molokai
+	branch = master
 [submodule ".bash-git-prompt"]
 	path = .bash-git-prompt
 	url = https://github.com/magicmonty/bash-git-prompt.git
+	branch = master
+[submodule ".git-cd"]
+	path = .git-cd
+	url = git@github.com:tschottdorf/git-cd.git
+	branch = master
