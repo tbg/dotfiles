@@ -20,5 +20,5 @@
 	branch = master
 [submodule ".git-cd"]
 	path = .git-cd
-	url = git@github.com:tschottdorf/git-cd.git
+	url = https://github.com/tschottdorf/git-cd.git
 	branch = master
