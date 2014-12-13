@@ -1,10 +1,34 @@
 execute pathogen#infect()
+Helptags
 syntax on
 filetype plugin indent on
+silent !stty -ixon > /dev/null 2>/dev/null
 
 :set  t_Co=256
 let g:rehash256 = 1
 colorscheme molokai
+
+" ultisnips
+let g:UltiSnipsExpandTrigger="<C-s>"
+let g:UltiSnipsJumpForwardTrigger="<c-r>"
+let g:UltiSnipsJumpBackwardTrigger="<c-e>"
+
+" vim-go
+let go_highlight_operators = 1
+let go_highlight_space_tab_error = 1
+let go_highlight_structs = 1
+let go_highlight_trailing_whitespace_error = 1
+let go_auto_type_info = 1
+let go_def_mapping_enabled = 1
+let go_doc_keywordprg_enabled = 1
+let go_fmt_autosave = 1
+let go_highlight_array_whitespace_error = 1
+let go_highlight_chan_whitespace_error = 1
+let go_highlight_extra_types = 1
+let go_highlight_functions = 1
+let go_highlight_methods = 1
+let go_fmt_command = 'goimports'
+
 
 " basics
 set modelines=0
@@ -76,9 +100,9 @@ set gdefault
 set incsearch
 set showmatch
 set hlsearch
-nnoremap <leader><space> :noh<cr>
-nnoremap <tab> %
-vnoremap <tab> %
+"nnoremap <leader><space> :noh<cr>
+"nnoremap <tab> %
+"vnoremap <tab> %
 
 set relativenumber
 set undofile
@@ -103,7 +127,7 @@ set statusline+=\ %P    "percent through file
 
 
 " editing
-set completeopt= " don't use a pop up menu for completions
+"set completeopt= " don't use a pop up menu for completions
 set expandtab " no real tabs please!
 set formatoptions=rq " Automatically insert comment leader on return, and let gq format comments
 set ignorecase " case insensitive by default
@@ -130,28 +154,24 @@ inoremap <right> <nop>
 nnoremap j gj
 nnoremap k gk
 
+nnoremap <C-q> gt
+nnoremap <C-a> gT
 nnoremap ; :
 
 " leaderboard
 nnoremap <leader>w :%s/\s\+$//<cr>:let @/=''<cr> " strip whitespace after line
-nnoremap <leader>a :Ack
+nnoremap <leader>p "+p
+nnoremap <leader>y "+
 
-au BufNewFile,BufReadPost *.coffee setl foldmethod=indent nofoldenable
-autocmd FileType c,cpp,java,ruby,haml,php autocmd BufWritePre <buffer> :%s/\s\+$//e
-"au FocusLost * :wa
+autocmd FileType c,cpp,java,ruby,yaml,haml,php,rb,pp,go autocmd BufWritePre <buffer> :%s/\s\+$//e
 
 set guifont=Inconsolata-dz:h14
 
-
-" hamlc as haml
-au BufRead,BufNewFile *.hamlc set ft=haml
-au BufRead,BufNewFile *.voice set ft=ruby
 
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
-
 
 " plasticboy markdown
 " no folding
