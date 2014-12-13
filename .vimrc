@@ -45,6 +45,7 @@ set wrap
 set textwidth=79
 set formatoptions=qrn1
 set colorcolumn=79
+set nojoinspaces
 
 
 set cursorcolumn " highlight the current column

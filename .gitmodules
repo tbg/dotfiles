@@ -22,3 +22,6 @@
 	path = .git-cd
 	url = https://github.com/tschottdorf/git-cd.git
 	branch = master
+[submodule ".vim/bundle/YouCompleteMe"]
+	path = .vim/bundle/YouCompleteMe
+	url = https://github.com/Valloric/YouCompleteMe
