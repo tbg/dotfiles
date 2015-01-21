@@ -25,3 +25,6 @@
 [submodule ".vim/bundle/YouCompleteMe"]
 	path = .vim/bundle/YouCompleteMe
 	url = https://github.com/Valloric/YouCompleteMe
+[submodule ".vim/bundle/vim-clojure-static"]
+	path = .vim/bundle/vim-clojure-static
+	url = https://github.com/guns/vim-clojure-static
