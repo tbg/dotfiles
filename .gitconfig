@@ -12,7 +12,7 @@
   ci = commit
   br = branch
   co = checkout
-  ca = commit --amend --no-edit
+  ca = commit --amend --no-edit --reset-author
   rbo = rebase origin/master
   hr = reset --hard
   pr = pull --rebase
