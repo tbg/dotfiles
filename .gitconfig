@@ -19,6 +19,7 @@
   smu = submodule update --init --recursive
   s = status --short --branch
   aa = add -A
+  wc = whatchanged
 
 [branch]
   autosetuprebase = always
