@@ -1,6 +1,7 @@
 #!/bin/bash
 
-. ~/.git-cd/gitcd.sh
+source ~/.git-cd/gitcd.sh
+source ~/.git-completion.bash
 
 # bash-git-prompt
 export GIT_PROMPT_ONLY_IN_REPO=0
