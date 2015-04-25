@@ -20,6 +20,7 @@
   s = status --short --branch
   aa = add -A
   wc = whatchanged
+  fap = fetch --all --prune
 
 [branch]
   autosetuprebase = always
