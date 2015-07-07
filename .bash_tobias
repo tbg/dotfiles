@@ -18,3 +18,5 @@ export PATH="$PATH:$GOPATH/bin"
 alias g=git
 alias gcd=gitcd
 alias ccd="gitcd cockroachdb/cockroach"
+
+__git_complete g __git_main
