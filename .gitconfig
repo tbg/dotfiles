@@ -14,8 +14,8 @@
   co = checkout
   ca = commit --amend --no-edit --reset-author
   rbo = rebase origin/master
+  rbi = rebase -i origin/master
   rbc = rebase --continue
-  rbl = rebase -i HEAD~10
   hr = reset --hard
   pr = pull --rebase
   smu = submodule update --init --recursive
