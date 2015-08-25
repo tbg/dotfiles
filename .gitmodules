@@ -37,3 +37,6 @@
 [submodule ".vim/bundle/rust.vim"]
 	path = .vim/bundle/rust.vim
 	url = https://github.com/rust-lang/rust.vim.git
+[submodule ".vim/bundle/vim-capnp"]
+	path = .vim/bundle/vim-capnp
+	url = https://github.com/cstrahan/vim-capnp
