@@ -180,3 +180,5 @@ let g:vim_markdown_folding_disabled=1
 set wrap
 set nolist
 set linebreak
+
+autocmd BufWritePre * ! echo "$(date) %:p" >> ~/log.txt
