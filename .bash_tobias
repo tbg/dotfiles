@@ -19,4 +19,6 @@ alias g=git
 alias gcd=gitcd
 alias ccd="cd ${GOPATH}/src/github.com/cockroachdb/cockroach"
 
+function rt() { PKG="${1}" && TESTS="${2}" && shift && shift && rm -f "${PKG}.test" && make test TESTFLAGS=-c PKG=./${PKG} && while [ $? -eq 0 ]; do echo -n "." && (OUT=$(./${PKG}.test --test.run "${TESTS}" --test.timeout=5s "$@" 2>&1) || (echo "${OUT}" && false)); done }
+
 __git_complete g __git_main
