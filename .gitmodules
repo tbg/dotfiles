@@ -40,3 +40,6 @@
 [submodule ".vim/bundle/vim-capnp"]
 	path = .vim/bundle/vim-capnp
 	url = https://github.com/cstrahan/vim-capnp
+[submodule ".vim/bundle/ctrlp.vim"]
+	path = .vim/bundle/ctrlp.vim
+	url = https://github.com/kien/ctrlp.vim
