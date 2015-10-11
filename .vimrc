@@ -29,6 +29,10 @@ let go_highlight_functions = 1
 let go_highlight_methods = 1
 let go_fmt_command = 'goimports'
 
+" ctrl-p
+let g:ctrlp_match_window = 'bottom,order:ttb'
+let g:ctrlp_switch_buffer = 0
+let g:ctrlp_working_path_mode = 0
 
 " basics
 set modelines=0
