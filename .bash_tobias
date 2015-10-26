@@ -21,4 +21,44 @@ alias ccd="cd ${GOPATH}/src/github.com/cockroachdb/cockroach"
 
 function rt() { PKG="${1}" && TESTS="${2}" && shift && shift && rm -f "${PKG}.test" && make test TESTFLAGS=-c PKG=./${PKG} && while [ $? -eq 0 ]; do echo -n "." && (OUT=$(./${PKG}.test --test.run "${TESTS}" --test.timeout=5s "$@" 2>&1) || (echo "${OUT}" && false)); done }
 
+function gpr () {
+  hub fetch origin refs/pull/$1/head:pr/$1 && hub checkout pr/$1
+}
+
+function docker () {
+  eval "$(docker-machine env default)" && $(which docker) "$@"
+}
+
+# dr = list all roach nodes
+# dr 0 2 4 = list only 0, 2, 4
+function dr () {
+  if [ -z "${1}" ]; then
+    docker ps -q --filter "label=Roach"
+  else
+    for i in "$@"; do
+      docker ps -q --filter "label=Hostname=roach${i}"
+    done
+  fi
+}
+
+function dhp() {
+  docker inspect -f '{{.NetworkSettings.IPAddress}}' "$@"
+}
+
+function dru() {
+  echo http://$(dhp "$@"):26257/
+}
+
+function dpprof() {
+  docker exec -t -i $(dr $1) /bin/bash -c 'go tool pprof /cockroach <(wget --no-check-certificate -qO- https://$(hostname):26257/debug/pprof/profile )'
+}
+
+function da () {
+  docker ps -q
+}
+
+function dk () {
+  docker kill "$@"
+}
+
 __git_complete g __git_main
