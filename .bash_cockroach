@@ -1,0 +1,64 @@
+#!/bin/bash
+
+function rt () 
+{ 
+    PKG="${2}" && TESTS="${3}" && make "${1}" TESTFLAGS=-c PKG=./${PKG} && shift && shift && shift && bash -xc "stress ./${PKG}.test --test.run "${TESTS}" --test.timeout 2m "$@"";
+}
+
+function gpr () {
+  hub fetch origin refs/pull/$1/head:pr/$1 && hub checkout pr/$1
+}
+
+# auto-env when using docker.
+function docker () {
+  eval "$(docker-machine env default)" &> /dev/null && $(which docker) "$@"
+}
+
+# dr = list all roach nodes
+# dr 0 2 4 = list only 0, 2, 4
+function dr () {
+  if [ -z "${1}" ]; then
+    docker ps -q --filter "label=Roach"
+  else
+    for i in "$@"; do
+      docker ps -q --filter "label=Hostname=roach${i}"
+    done
+  fi
+}
+
+function dockerhost() {
+  docker-machine inspect default --format '{{ .Driver.IPAddress }}'
+}
+
+function dui() {
+echo https://$(dockerhost):$(dockerport $1)
+}
+
+function dockerport() {
+  docker inspect \
+    --format '{{ (index (index .NetworkSettings.Ports "26257/tcp") 0).HostPort }}' \
+    $(dr $1)
+}
+
+function dtr() {
+  echo $(dui $1)/debug/requests
+}
+
+function dpp() {
+  docker exec -t -i $(dr $1) /bin/bash -c 'go tool pprof /cockroach <(wget --no-check-certificate -qO- https://$(hostname):26257/debug/pprof/profile )'
+}
+
+function dph() {
+  docker exec -t -i $(dr $1) /bin/bash -c 'go tool pprof /cockroach <(wget --no-check-certificate -qO- https://$(hostname):26257/debug/pprof/heap)'
+}
+
+
+function da () {
+  docker ps -q
+}
+
+function dk () {
+  docker kill "$@"
+}
+
+
