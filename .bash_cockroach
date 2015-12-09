@@ -61,4 +61,8 @@ function dk () {
   docker kill "$@"
 }
 
-
+function tssh () {
+  host=${1}
+  shift
+  ssh -i ~/.ssh/cockroach.pem ubuntu@${host} "$@"
+}
