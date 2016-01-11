@@ -1,5 +1,15 @@
 #!/bin/bash
 
+# http://stackoverflow.com/a/33844061/3667177 
+function capture() {
+    sudo dtrace -p "$1" -qn '
+        syscall::write*:entry
+        /pid == $target && arg0 == 1/ {
+            printf("%s", copyinstr(arg1, arg2));
+        }
+    '
+}
+
 function rt () 
 { 
     PKG="${2}" && TESTS="${3}" && make "${1}" TESTFLAGS=-c PKG=./${PKG} && shift && shift && shift && bash -xc "stress ./${PKG}.test --test.run "${TESTS}" --test.timeout 2m "$@"";
@@ -64,5 +74,19 @@ function dk () {
 function tssh () {
   host=${1}
   shift
-  ssh -i ~/.ssh/cockroach.pem ubuntu@${host} "$@"
+  ssh -i ~/.ssh/cockroach-tobias.pem ubuntu@${host} "$@"
+}
+
+function pkggrep() { git grep -F $1 | head -n1 | sed -E 's~([^/]+).*~\1~'; }
+
+function cstress() {
+  make stress PKG=./$(pkggrep $1) TESTS=$1 TESTFLAGS=$2
+}
+
+function cstressrace() {
+  make stress PKG=./$(pkggrep $1) TESTS=$1 TESTFLAGS=$2
+}
+
+function vgrep() {
+  vim -p $(git grep -l $1)
 }
