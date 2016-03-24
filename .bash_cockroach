@@ -80,13 +80,14 @@ function tssh () {
 function pkggrep() { git grep -F $1 | head -n1 | sed -E 's~([^/]+).*~\1~'; }
 
 function cstress() {
-  make stress PKG=./$(pkggrep $1) TESTS=$1 TESTFLAGS=$2
+  make stress PKG=./$(pkggrep $1) TESTS="${1}" TESTFLAGS="${2}"
 }
 
 function cstressrace() {
-  make stress PKG=./$(pkggrep $1) TESTS=$1 TESTFLAGS=$2
+  make stress PKG=./$(pkggrep $1) TESTS="${1}" TESTFLAGS="${2}"
 }
 
-function vgrep() {
-  vim -p $(git grep -l $1)
+vgrep ()
+{
+    vim "+/$1" -p $(git grep -l "$@")
 }
