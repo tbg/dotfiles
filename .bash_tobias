@@ -22,5 +22,10 @@ alias ag="$(which ag) --ignore '*\.pb\.*'"
 alias agl="ag -l"
 alias f="find . -name"
 
+function gc {
+  git br -d $(git br --merged | grep -vF '*')
+  git br -D $(git br | grep -E '^\s*pr\/[0-9]+$')
+}
+
 source ~/.bash_cockroach
 __git_complete g __git_main
