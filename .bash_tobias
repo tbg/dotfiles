@@ -29,3 +29,7 @@ function gc {
 
 source ~/.bash_cockroach
 __git_complete g __git_main
+
+export VISUAL="nvim"
+export EDITOR="$VISUAL"
+alias vim=nvim
