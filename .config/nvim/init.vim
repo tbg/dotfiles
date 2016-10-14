@@ -13,11 +13,8 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'scrooloose/nerdtree'
 
-" Sourcegraph code browser wizard thing
-Plug 'sourcegraph/sourcegraph-vim', {'for': ['go']}
-
 " General programming
-"Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --clang-completer' }
+Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --clang-completer' }
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -47,11 +44,11 @@ Plug 'plasticboy/vim-markdown'
 Plug 'rking/ag.vim'
 
 " completion
-function! DoRemote(arg)
-  UpdateRemotePlugins
-endfunction
-Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
-Plug 'zchee/deoplete-go', { 'do': 'make' }
+" function! DoRemote(arg)
+"   UpdateRemotePlugins
+" endfunction
+" Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
+" Plug 'zchee/deoplete-go', { 'do': 'make' }
 
 call plug#end()
 " ---------------------------------------------------------------------------

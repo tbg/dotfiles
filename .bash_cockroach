@@ -1,93 +1,10 @@
 #!/bin/bash
 
-# http://stackoverflow.com/a/33844061/3667177 
-function capture() {
-    sudo dtrace -p "$1" -qn '
-        syscall::write*:entry
-        /pid == $target && arg0 == 1/ {
-            printf("%s", copyinstr(arg1, arg2));
-        }
-    '
-}
-
-function rt () 
-{ 
-    PKG="${2}" && TESTS="${3}" && make "${1}" TESTFLAGS=-c PKG=./${PKG} && shift && shift && shift && bash -xc "stress ./${PKG}.test --test.run "${TESTS}" --test.timeout 2m "$@"";
-}
-
-function gpr () {
-  hub fetch origin refs/pull/$1/head:pr/$1 && hub checkout pr/$1
-}
-
-# auto-env when using docker.
-function docker () {
-  eval "$(docker-machine env default)" &> /dev/null && $(which docker) "$@"
-}
-
-# dr = list all roach nodes
-# dr 0 2 4 = list only 0, 2, 4
-function dr () {
-  if [ -z "${1}" ]; then
-    docker ps -q --filter "label=Roach"
-  else
-    for i in "$@"; do
-      docker ps -q --filter "label=Hostname=roach${i}"
-    done
-  fi
-}
-
-function dockerhost() {
-  docker-machine inspect default --format '{{ .Driver.IPAddress }}'
-}
-
-function dui() {
-echo https://$(dockerhost):$(dockerport $1)
-}
-
-function dockerport() {
-  docker inspect \
-    --format '{{ (index (index .NetworkSettings.Ports "26257/tcp") 0).HostPort }}' \
-    $(dr $1)
-}
-
-function dtr() {
-  echo $(dui $1)/debug/requests
-}
-
-function dpp() {
-  docker exec -t -i $(dr $1) /bin/bash -c 'go tool pprof /cockroach <(wget --no-check-certificate -qO- https://$(hostname):26257/debug/pprof/profile )'
-}
-
-function dph() {
-  docker exec -t -i $(dr $1) /bin/bash -c 'go tool pprof /cockroach <(wget --no-check-certificate -qO- https://$(hostname):26257/debug/pprof/heap)'
-}
-
-
-function da () {
-  docker ps -q
-}
-
-function dk () {
-  docker kill "$@"
-}
-
-function tssh () {
-  host=${1}
-  shift
-  ssh -i ~/.ssh/cockroach-tobias.pem ubuntu@${host} "$@"
-}
-
-function pkggrep() { git grep -F $1 | head -n1 | sed -E 's~([^/]+).*~\1~'; }
-
-function cstress() {
-  make stress PKG=./$(pkggrep $1) TESTS="${1}" TESTFLAGS="${2}"
-}
-
-function cstressrace() {
-  make stress PKG=./$(pkggrep $1) TESTS="${1}" TESTFLAGS="${2}"
-}
-
 vgrep ()
 {
     vim "+/$1" -p $(git grep -l "$@")
 }
+
+export GOOGLE_PROJECT="cockroach-tschottdorf"
+export GOTRACEBACK="all"
+export PATH="${PATH}:${GOPATH}/src/github.com/cockroachdb/cockroach"
